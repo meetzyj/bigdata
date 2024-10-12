@@ -10,7 +10,7 @@ import logging
 def main():
     # 参数设置
     train_dir = "../datasets/train.csv"
-    save_dir = "../checkpoints/mlp_20e.pth"
+    save_dir = "../checkpoints/mlp_"
     log_file = "../log/mlp_20e.log"
     seed = 114514
     np.random.seed(seed)
@@ -71,8 +71,8 @@ def main():
         print('Epoch {} finished, average loss {}, hits@20 {}'.format(epoch, sum(losses)/len(losses), sum(hits)/len(hits)))
         loss_for_plot.append(sum(losses)/len(losses))
         hits_for_plot.append(sum(hits)/len(hits))
-        if epoch % 5 == 0:
-            torch.save(model.state_dict(), save_dir)
+        
+        torch.save(model.state_dict(), save_dir+str(epoch)+'.pth')
 
 if __name__ == "__main__":
     main()
